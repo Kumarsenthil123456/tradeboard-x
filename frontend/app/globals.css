@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 222 47% 5%;
+    --foreground: 210 40% 95%;
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 95%;
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 188 100% 50%;
+    --primary-foreground: 222 47% 5%;
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217 32% 12%;
+    --muted-foreground: 215 20% 55%;
+    --accent: 217 32% 17%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 72% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217 32% 15%;
+    --input: 217 32% 12%;
+    --ring: 188 100% 50%;
+    --radius: 0.75rem;
+    --font-space-grotesk: 'Space Grotesk', sans-serif;
+    --font-orbitron: 'Orbitron', sans-serif;
+    --font-jetbrains-mono: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 229, 255, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 110%, rgba(0, 255, 136, 0.04), transparent);
+    background-attachment: fixed;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+}
+
+@layer components {
+  /* Glass card effect */
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-md border border-white/[0.06] rounded-xl;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+  
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 hover:border-white/[0.1] hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+  }
+
+  /* Neon text effects */
+  .text-neon-cyan {
+    color: #00E5FF;
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+  }
+
+  .text-neon-green {
+    color: #00FF88;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.6);
+  }
+
+  .text-neon-red {
+    color: #FF4B4B;
+    text-shadow: 0 0 20px rgba(255, 75, 75, 0.4);
+  }
+
+  /* Gradient borders */
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: 0.75rem;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.3), transparent 50%, rgba(0, 255, 136, 0.2));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Status badges */
+  .badge-profit {
+    @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-mono px-2 py-0.5 rounded;
+  }
+
+  .badge-loss {
+    @apply bg-red-500/10 text-red-400 border border-red-500/20 text-xs font-mono px-2 py-0.5 rounded;
+  }
+
+  .badge-open {
+    @apply bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 text-xs font-medium px-2 py-0.5 rounded;
+  }
+
+  .badge-closed {
+    @apply bg-slate-500/10 text-slate-400 border border-slate-500/20 text-xs font-medium px-2 py-0.5 rounded;
+  }
+
+  /* Input styles */
+  .input-dark {
+    @apply bg-muted/50 border border-border/60 rounded-lg px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-colors;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-medium px-4 py-2 rounded-lg hover:bg-primary/90 transition-all duration-200 hover:shadow-[0_0_20px_rgba(0,229,255,0.3)] active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply text-muted-foreground hover:text-foreground hover:bg-white/5 px-3 py-2 rounded-lg transition-all duration-200 active:scale-95;
+  }
+
+  /* Ticker animation */
+  .ticker-container {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-scroll {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Chart tooltip */
+  .chart-tooltip {
+    @apply glass-card px-3 py-2 text-xs font-mono;
+  }
+
+  /* Loading skeleton */
+  .skeleton {
+    @apply bg-muted/50 rounded animate-pulse;
+    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted)/0.5) 50%, hsl(var(--muted)) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Trade row hover */
+  .trade-row {
+    @apply transition-all duration-200 hover:bg-white/[0.02] cursor-pointer;
+  }
+
+  /* Sidebar active item */
+  .sidebar-item-active {
+    @apply bg-primary/10 text-primary border-r-2 border-primary;
+  }
+
+  .sidebar-item {
+    @apply text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all duration-200;
+  }
+}

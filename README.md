@@ -1,4 +1,4 @@
-# ⚡ TradeBoard X — AI Powered Smart Trading Dashboard
+# ⚡ TradeBoard X —  Smart Trading Dashboard
 
 > A production-ready full-stack SaaS platform for professional crypto, forex, and stock traders. Track, analyze, and optimize your trading performance.
 

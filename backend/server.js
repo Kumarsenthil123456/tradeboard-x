@@ -51,7 +51,7 @@ app.use(helmet({
 
 // ✅ FIX 4: CORS — credentials:true required for httpOnly cookie refresh tokens
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: [process.env.CLIENT_URL || 'http://localhost:3000', 'http://localhost:3001'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],

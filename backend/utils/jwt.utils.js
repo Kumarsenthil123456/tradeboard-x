@@ -62,20 +62,20 @@ const verifyRefreshToken = (token) => {
 
 const setRefreshTokenCookie = (res, token) => {
   res.cookie('refreshToken', token, {
-    httpOnly: true,                                         // JS cannot read (XSS safe)
-    secure: process.env.NODE_ENV === 'production',          // HTTPS only in prod
-    sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax', // lax for dev
-    maxAge: 7 * 24 * 60 * 60 * 1000,                       // 7 days
-    path: '/api/auth/refresh',                              // Only sent to refresh endpoint
+    httpOnly: true,
+    secure: true, // Required for cross-site sameSite:none
+    sameSite: 'none', // Allow local frontend to talk to Render backend
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    path: '/api/auth', // Wider path to include logout
   });
 };
 
 const clearRefreshTokenCookie = (res) => {
   res.clearCookie('refreshToken', {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-    path: '/api/auth/refresh',
+    secure: true,
+    sameSite: 'none',
+    path: '/api/auth',
   });
 };
 

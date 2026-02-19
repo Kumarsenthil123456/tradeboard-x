@@ -53,4 +53,9 @@ export const userService = {
       currentPassword,
       newPassword,
     }),
+
+  getAllUsers: (page = 1, limit = 20, search = '') =>
+    apiClient.get<ApiResponse<{ users: User[]; total: number; page: number }>>(
+      `/users/all?page=${page}&limit=${limit}&search=${search}`
+    ),
 };

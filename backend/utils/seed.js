@@ -34,7 +34,7 @@ async function seed() {
   // Create admin user
   const admin = await User.create({
     username: 'admin',
-    email: 'admin@tradeboard.x',
+    email: 'admin@tradeboard.com',
     password: 'Admin123!',
     role: 'admin',
     tradingStyle: 'swing_trader',
@@ -44,7 +44,7 @@ async function seed() {
   // Create demo trader
   const trader = await User.create({
     username: 'demotrader',
-    email: 'demo@tradeboard.x',
+    email: 'demo@tradeboard.com',
     password: 'Demo123!',
     role: 'user',
     tradingStyle: 'day_trader',
@@ -52,7 +52,7 @@ async function seed() {
     preferredAssets: ['BTC', 'ETH', 'SOL'],
   });
 
-  console.log('👤 Created users: admin@tradeboard.x / Admin123! | demo@tradeboard.x / Demo123!');
+  console.log('👤 Created users: admin@tradeboard.com / Admin123! | demo@tradeboard.com / Demo123!');
 
   // Generate 50 trades for demo trader
   const trades = [];
@@ -66,16 +66,16 @@ async function seed() {
     const entryPrice = randomBetween(10, 50000);
     const isClosed = Math.random() > 0.2;
     const isWin = Math.random() > 0.4;
-    
+
     let exitPrice = null;
     let status = 'open';
-    
+
     if (isClosed) {
       status = 'closed';
       const changePercent = isWin
         ? randomBetween(0.5, 15) / 100
         : randomBetween(0.5, 8) / 100;
-      
+
       exitPrice = position === 'long'
         ? entryPrice * (1 + changePercent)
         : entryPrice * (1 - changePercent);

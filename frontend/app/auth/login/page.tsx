@@ -51,7 +51,7 @@ export default function LoginPage() {
 
       if (!axiosErr.response) {
         // No response = backend not running or CORS blocked
-        message = 'Cannot connect to server. Make sure the backend is running on port 5000.';
+        message = 'Cannot connect to server. Make sure the API URL is correct and the backend is running.';
       } else {
         switch (axiosErr.response.status) {
           case 400:
@@ -182,7 +182,7 @@ export default function LoginPage() {
           <div className="mt-4 p-4 rounded-xl border border-yellow-500/20 bg-yellow-500/5 text-xs font-mono">
             <p className="text-yellow-400 font-semibold mb-2">🛠 Dev Panel</p>
             <p className="text-muted-foreground">
-              API: <span className="text-cyan-400">{process.env.NEXT_PUBLIC_API_URL || '⚠️ NEXT_PUBLIC_API_URL not set'}</span>
+              API: <span className="text-cyan-400">{process.env.NEXT_PUBLIC_API_URL || 'https://tradeboard-x-2.onrender.com/api'}</span>
             </p>
             <p className="text-muted-foreground mt-1">
               Backend health:{' '}
@@ -191,7 +191,7 @@ export default function LoginPage() {
               </a>
             </p>
             <p className="text-muted-foreground mt-1">
-              Demo: <span className="text-cyan-400">demo@tradeboard.x</span> / <span className="text-cyan-400">Demo123!</span>
+              Demo: <span className="text-cyan-400">demo@tradeboard.com</span> / <span className="text-cyan-400">Demo123!</span>
             </p>
           </div>
         )}
